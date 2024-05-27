@@ -1,0 +1,59 @@
+TODO
+
+- install python (check the checkbox for "add to path")
+
+RUNNING THE PROJECT
+
+- To start a virtual environment in Python, you can use a tool called virtualenv or the built-in venv module (introduced in Python 3.3). Here's how to do it using venv:
+
+Open your terminal or command prompt:
+
+Navigate to your project directory:
+
+[ cd path/to/your/project ]
+
+
+Activate the virtual environment:
+
+On Windows:
+
+[ myenv\Scripts\activate ]
+
+On macOS and Linux:
+
+[ source myenv/bin/activate ]
+
+When the virtual environment is activated, you'll see its name in your terminal prompt.
+
+Install dependencies:
+Once the virtual environment is activated, you can install Python packages using pip, and they will be isolated from the system-wide Python installation:
+
+[ pip install -r requirements.txt ]
+
+
+Run the development server:
+Start the Django development server by running the following command:
+
+
+[ python manage.py runserver ]
+
+This will start the development server, and by default, it will listen on http://127.0.0.1:8000/.
+
+Access your Django project:
+Open your web browser and navigate to http://127.0.0.1:8000/ or http://localhost:8000/. You should see your Django project running.
+
+
+Deactivate the virtual environment:
+When you're done working in the virtual environment, you can deactivate it:
+
+
+[ deactivate ]
+
+PRE-POPULATING THE DATABASE
+use the following command, it will ask the number of entities to be created:
+
+[ python3 manage.py populate_db ]
+for PatientData table
+
+[ python3 manage.py populate_db2 ]
+for EarlyDiagnosisPatient table
