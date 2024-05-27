@@ -1,0 +1,48 @@
+<!-- diagnosis_per_month.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Diagnosis per Month</title>
+    <!-- Include Chart.js library -->
+    <script src="/static/js/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 50%;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        // Fetch data from the server
+        const labels = {{ labels|safe }};
+        const data = {{ data|safe }};
+
+        // Draw the chart using Chart.js
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total Diagnosis per Month',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>

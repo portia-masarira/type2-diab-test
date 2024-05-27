@@ -1,0 +1,63 @@
+from django.http import HttpResponse
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet
+from datetime import datetime
+
+def generate_pdf_report(request):
+    # Get user account generating the report
+    user_account = request.user.username
+
+    # Get current time
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Create a response object
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+
+    # Create a PDF document
+    doc = SimpleDocTemplate(response, pagesize=letter)
+
+    # Define styles
+    styles = getSampleStyleSheet()
+    title_style = styles['Title']
+    heading_style = styles['Heading2']
+    normal_style = styles['Normal']
+
+    # Create content for the PDF
+    content = []
+
+    # Add system logo (assuming 'logo.png' is in your static files directory)
+    from reportlab.lib.units import inch
+    from reportlab.lib.utils import ImageReader
+    logo = ImageReader('path_to_your_logo/logo.png')
+    logo_width, logo_height = logo.getSize()
+    aspect_ratio = logo_height / logo_width
+    logo_img = logo_path
+    content.append(logo_img)
+
+    # Add title
+    content.append(title_style("Report Title"))
+
+    # Add current time and user account
+    content.append(heading_style(f"Report generated on: {current_time} by: {user_account}"))
+
+    # Add table of statistics
+    data = [['Total Patients', 'Diabetic Patients', 'Non-Diabetic Patients'],
+            ['100', '50', '50']]  # Example data, replace with your actual statistics
+    table = Table(data)
+    table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                               ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                               ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                               ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
+    content.append(table)
+
+    # Build PDF document
+    doc.build(content)
+
+    return response
+

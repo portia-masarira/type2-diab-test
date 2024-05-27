@@ -1,0 +1,208 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Tesita | Early Diagnosis</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    
+
+</head>
+<body class="">
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
+	<!-- [ navigation menu ] start -->
+    {% include 'basecomponent/navbar.html' %}
+	<!-- [ navigation menu ] end -->
+	<!-- [ Header ] start -->
+    {% include 'basecomponent/topnavbar.html' %}
+	<!-- [ Header ] end -->
+	
+	
+
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">General Diagnosis</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">New Patients</a></li>
+                            <li class="breadcrumb-item"><a href="#!">Early Diagnosis</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+			<!-- [ card ] start -->
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<h5>Basic Tabs</h5>
+					</div>
+					<div class="card-body">
+						<ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active text-uppercase" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-uppercase" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+							</li>
+                            <li class="nav-item">
+								<a class="nav-link text-uppercase" id="contact-tab" data-toggle="tab" href="#hist" role="tab" aria-controls="hist" aria-selected="false">History</a>
+							</li>
+						</ul>
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+								<p class="mb-0"><strong>Name:</strong> {{patient.name}} </p>
+								<p class="mb-0"><strong>Gender:</strong> {{patient.sex}}</p>
+								<p class="mb-0"><strong>Age:</strong> {{patient.age}} </p>
+							</div>
+							<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+								<p class="mb-0"><strong>Contact:</strong> {{patient.contact}}</p>
+								<p class="mb-0"><strong>Address:</strong> {{patient.address}}</p>
+							</div>
+                            <div class="tab-pane fade" id="hist" role="tabpanel" aria-labelledby="contact-tab">
+								<p class="mb-0"><strong>Created On:</strong> {{patient.created_at}}</p>
+	
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			<div class="col-xl-12">
+				<div class="row">
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>No. of Pregnancies</strong>
+								<p class="mb-0">{{patient.pregnancies}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>Glucose Level</strong>
+								<p class="mb-0">{{patient.glucose_level}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>Blood Pressure</strong>
+								<p class="mb-0">{{patient.blood_pressure}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>Skin Thickness</strong>
+								<p class="mb-0">{{patient.skin_thickness}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>Insulin</strong>
+								<p class="mb-0">{{patient.insulin}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>BMI</strong>
+								<p class="mb-0">{{patient.BMI}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>Diabetes Pedigree Function</strong>
+								<p class="mb-0">{{patient.Diabetes_Pedigree_Function}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>Height</strong>
+								<p class="mb-0">{{patient.height}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>Mass</strong>
+								<p class="mb-0">{{patient.mass}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-3">
+						<div class="card">
+							<div class="card-body">
+								<strong>Status</strong>
+								<p class="mb-0">{{patient.status}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			
+
+				
+			</div>
+			
+			<!-- [ card ] end -->
+		</div>
+        <!-- [ Main Content ] end -->
+
+    </div>
+</section>
+
+     <!-- Required Js -->
+     <script src="{% static 'js/vendor-all.min.js' %}"></script>
+     <script src="{% static 'js/plugins/bootstrap.min.js' %}"></script>
+     <script src="{% static 'js/pcoded.min.js' %}"></script>
+
+ 
+
+
+</body>
+
+</html>

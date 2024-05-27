@@ -1,0 +1,33 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Diapres | Error 500 Wrong Data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"><link rel="stylesheet" href="{% static 'eror-page/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h5>Internal Server Error !</h5>
+    <h1>5</h1>
+    <h1>00</h1>
+    <div class="box">
+			<span></span><span></span>
+			<span></span><span></span>
+			<span></span>
+		</div>
+    <div class="box">
+			<span></span><span></span>
+			<span></span><span></span>
+			<span></span>
+		</div>
+    <p> Uh oh, there seems to be a problem. You entered the wrong data type, check your data before submitting.
+			<br/>
+			<a href="{% url 'dashboard' %}">Go Back</a>
+			</p>
+<!-- partial -->
+  
+</body>
+</html>

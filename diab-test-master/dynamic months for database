@@ -1,0 +1,60 @@
+from django.core.management.base import BaseCommand
+from django.utils import timezone
+from base.models import EarlyDiagnosisPatient
+import random
+from datetime import datetime, timedelta
+
+class Command(BaseCommand):
+    help = "Populates the database with randomly generated data."
+
+    def add_arguments(self, parser):
+        parser.add_argument("--amount", type=int, help="The number of entities to create.")
+
+    def handle(self, *args, **options):
+        names = ['Scarlett', 'Elizabeth', 'Emily', 'Chloe', 'Violet', 'Abigail', 'Hazel', 'Aizivaishe', 'Akatendeka', 'Anaishe', 'Anatswanashe', 'Anenyasha', 'Anesu', 'Danai', 'Fadziso', 'Miriro', 'Mufaro', 'Ropafadzo', 'Rufaro', 'Akudzwe', 'Davidzo', 'Rudo']
+        surnames = ['Moyo', 'Ncube', 'Sibanda', 'Dube', 'Ndlovu', 'Ngwenya', 'Phiri', 'Nyoni', 'Tshuma', 'Mhlanga', 'Shumba', 'Shoko', 'Tembo', 'Hove', 'Maposa', 'Marufu', 'Makoni', 'Muyambo', 'Masuku', 'Chauke', 'Chuma', 'Takawira', 'Mpala', 'Muchenje', 'Sigauke', 'Mudzingwa', 'Taruvinga', 'Katsande']
+        sexes = ['Male','Female']
+        towns = ['Bulawayo', 'Harare', 'Mutare', 'Bindura', 'Chinhoyi', 'Mwenezi', 'Masvingo']
+        status_options = [True, False]
+
+        amount = options["amount"]
+        if amount is None:
+            amount = int(input("Enter the number of entities to create: "))
+
+        for _ in range(amount):
+            # Generate a random day within January
+            day_in_january = random.randint(1, 31)
+            # Create a datetime object for January of the current year
+            january_date = datetime(timezone.now().year, 1, day_in_january)
+            # Subtract a random number of days from the January date
+            created_date = january_date - timedelta(days=random.randint(0, 30))
+
+            patient = EarlyDiagnosisPatient.objects.create(
+                name=f"{random.choice(names)} {random.choice(surnames)}",
+                id_number=random.choice(id_numbers),
+                gender=random.choice(sexes),
+                address=f"{random.choice(address)}, {random.choice(address_street)}, {random.choice(towns)}",
+                contact=random.choice(contacts),
+                polyuria=random.choice([True, False]),
+                polydipsia=random.choice([True, False]),
+                polyphagia=random.choice([True, False]),
+                sudden_weight_loss=random.choice([True, False]),
+                weakness=random.choice([True, False]),
+                genital_thrush=random.choice([True, False]),
+                visual_blurring=random.choice([True, False]),
+                itching=random.choice([True, False]),
+                irritability=random.choice([True, False]),
+                delayed_healing=random.choice([True, False]),
+                partial_paresis=random.choice([True, False]),
+                muscle_stiffness=random.choice([True, False]),
+                alopecia=random.choice([True, False]),
+                obesity=random.choice([True, False]),
+                age=random.randint(1, 100),
+                height=random.uniform(1.0, 2.0),
+                mass=random.randint(40, 120),
+                status=random.choice(status_options),
+                created_at=created_date
+            )
+
+        self.stdout.write(self.style.SUCCESS("Successfully populated the database."))
+

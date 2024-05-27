@@ -1,0 +1,21 @@
+<div class="table-pagination">
+  <div class="text-center justify-between">
+      <div class="btn">
+          {% if patient_list.has_previous %}
+              <a href="?page={{ patient_list.previous_page_number }}" class="btn btn-primary btn-sm">
+                  <i class="fa fa-chevron-left m-l-5"></i> Previous
+              </a>
+          {% endif %}
+      </div>
+      <div>
+          <span><strong>Page {{ patient_list.number }} of {{ patient_list.paginator.num_pages }}</strong></span>
+      </div>
+      <div class="btn">
+          {% if patient_list.has_next %}
+              <a href="?page={{ patient_list.next_page_number }}" class="btn btn-primary btn-sm">
+                  Next <i class="fa fa-chevron-right m-l-5"></i>
+              </a>
+          {% endif %}
+      </div>
+  </div>
+</div>

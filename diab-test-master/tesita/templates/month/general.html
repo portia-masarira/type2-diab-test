@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Month</title>
+</head>
+<body>
+    <h1>Select Month to Generate Report</h1>
+    <form action="{% url 'month' %}" method="post">
+        {% csrf_token %}
+        <select name="selected_month">
+            {% for month in months %}
+                <option value="{{ month }}">{{ month }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Generate Report</button>
+    </form>
+</body>
+</html>

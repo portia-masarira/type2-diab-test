@@ -1,0 +1,11 @@
+django
+pillow
+pandas
+pickle
+sklearn
+matplotlib
+seaborn
+numpy
+plotly 
+lightgbm 
+termcolor

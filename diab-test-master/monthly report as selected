@@ -1,0 +1,90 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from datetime import datetime
+
+def generate_pdf_report(request):
+    if request.method == 'POST':
+        selected_month = request.POST.get('selected_month')
+        # Generate report for the selected month
+        # You can use selected_month to filter your database records
+        
+        # For simplicity, assuming report generation logic is here
+        
+        # Get user account generating the report
+        user_account = request.user.username
+
+        # Get current time
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        # Create a response object
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+
+        # Create a PDF document
+        doc = SimpleDocTemplate(response, pagesize=letter)
+
+        # Define styles
+        styles = getSampleStyleSheet()
+        title_style = styles['Title']
+        heading_style = styles['Heading2']
+        normal_style = styles['Normal']
+
+        # Create content for the PDF
+        content = []
+
+        # Add title
+        content.append(title_style("Report Title"))
+
+        # Add current time and user account
+        content.append(heading_style(f"Report generated on: {current_time} by: {user_account}"))
+
+        # Add table of statistics
+        data = [['Total Patients', 'Diabetic Patients', 'Non-Diabetic Patients'],
+                ['100', '50', '50']]  # Example data, replace with your actual statistics
+        table = Table(data)
+        table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                                   ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                                   ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                                   ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                                   ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                                   ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                                   ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
+        content.append(table)
+
+        # Build PDF document
+        doc.build(content)
+
+        return response
+    else:
+        # Query your database to get months with records
+        # months_with_records = YourModel.objects.dates('date_field', 'month')
+        months_with_records = ['January', 'February', 'March']  # Example months
+        
+        return render(request, 'select_month.html', {'months': months_with_records})
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Month</title>
+</head>
+<body>
+    <h1>Select Month to Generate Report</h1>
+    <form action="{% url 'generate_pdf_report' %}" method="post">
+        {% csrf_token %}
+        <select name="selected_month">
+            {% for month in months %}
+                <option value="{{ month }}">{{ month }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Generate Report</button>
+    </form>
+</body>
+</html>
+
